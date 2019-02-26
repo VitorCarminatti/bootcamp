@@ -12,7 +12,7 @@ nunjucks.configure('views', {
 app.use(express.urlencoded({ extended: false }))
 app.set('view engine', 'njk')
 
-const testaIdade = (req, res, next) => {
+const checkNullAge = (req, res, next) => {
   const { age } = req.query
 
   if (!age) {
@@ -26,13 +26,13 @@ app.get('/', (req, res) => {
   return res.render('age')
 })
 
-app.get('/major', testaIdade, (req, res) => {
+app.get('/major', checkNullAge, (req, res) => {
   const { age } = req.query
 
   return res.render('major', { age })
 })
 
-app.get('/minor', testaIdade, (req, res) => {
+app.get('/minor', checkNullAge, (req, res) => {
   const { age } = req.query
 
   return res.render('minor', { age })
